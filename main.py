@@ -1,16 +1,16 @@
 import sys
 from random import randint
 
-from PyQt6 import uic
+from Main_ui import Ui_MainWindow
 from PyQt6.QtCore import QPoint
 from PyQt6.QtGui import QPainter, QColor
 from PyQt6.QtWidgets import QMainWindow, QApplication
 
 
-class Main(QMainWindow):
+class Main(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setupUi(self)
         self.pushButton.clicked.connect(self.paint)
         self.do_paint = False
 
@@ -29,7 +29,7 @@ class Main(QMainWindow):
     def draw_circle(self, qp: QPainter):
         radius = randint(5, 50)
         center = QPoint(randint(radius, self.size().width() - radius), randint(radius, self.size().height()) - radius)
-        qp.setBrush(QColor('yellow'))
+        qp.setBrush(QColor(randint(0, 255), randint(0, 255), randint(0, 255)))
         qp.drawEllipse(center, radius, radius)
 
 
